@@ -44,4 +44,27 @@ public class ClienteController {
         }
     }
 
+    @PutMapping("/{idCliente}")
+    public ResponseEntity<Cliente> putCliente(@RequestBody Cliente cliente, @PathVariable Long idCliente){
+        Cliente c = clienteService.getClienteById(idCliente);
+        if(c!=null){
+            c.setEmail(cliente.getEmail());
+            c.setNombre(cliente.getNombre());
+            clienteService.save(c);
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
+
+    }
+
+    @DeleteMapping("/{idCliente}")
+    public ResponseEntity<Cliente> deleteCliente(@PathVariable Long idCliente){
+        Cliente c = clienteService.getClienteById(idCliente);
+        if(c!=null){
+            clienteService.deleteCliente(idCliente);
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
+    }
+
 }
