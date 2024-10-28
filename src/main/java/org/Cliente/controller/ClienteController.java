@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.Cliente.dto.ReporteClienteCompraDTO;
 import org.Cliente.model.Cliente;
 import org.Cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +75,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> putCliente(@RequestBody Cliente cliente, @PathVariable Long idCliente){
         Cliente c = clienteService.getClienteById(idCliente);
         if(c!=null){
-            c.setEmail(cliente.getEmail());
-            c.setNombre(cliente.getNombre());
-            clienteService.save(c);
+            clienteService.putCliente(c.getIdCliente(), c);
             return new ResponseEntity<>(c, HttpStatus.OK);
         }
         return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
