@@ -51,7 +51,7 @@ public class ExternalTokenAuthenticationFilter extends OncePerRequestFilter {
 
             if (validationResponse.getStatusCode() == HttpStatus.OK) {
 
-                // Deserializa el cuerpo de la respuesta JSON a un Map
+                
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
@@ -59,11 +59,11 @@ public class ExternalTokenAuthenticationFilter extends OncePerRequestFilter {
 
 
 
-                String role = responseBody.get("role"); // Asegúrate de usar la clave correcta
+                String role = responseBody.get("role"); 
 
                 if (role != null) {
 
-                    role = "ROLE_" + role.toUpperCase(); // Convierte a mayúsculas y agrega el prefijo
+                    role = "ROLE_" + role.toUpperCase(); 
 
                     Authentication auth = new ExternalServiceAuthenticationToken(token, List.of(new SimpleGrantedAuthority(role)));
 
